@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AmbitionsApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <% if logged_in? %>
+    <%# #option to logout
+    #welcome message %>
+    <form action="<%= session_url %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token  %>">
+    <input type="submit" value="Log Out">
+    </form>
+
+  <% else %>
+    <a href="<%= new_user_url %>">Sign up!</a>
+    <a href="<%= new_session_url %>">Log in!</a>
+  <% end %>
+
+  <body>
+    <%= yield %>
+  </body>
+    <% if flash[:errors] %>
+      <ul>
+        <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      </ul>
+
+    <% end %>
+    <% end %>
+
+</html>

@@ -1,0 +1,22 @@
+<h1>This is your <%= @goal.title %>'s showpage</h1>
+
+<ul>
+  
+  <li><%= @goal.title %></li>
+  <li><%= @goal.details %></li>
+  <li>Finished? <%= @goal.completed %></li>
+    <% if @goal.private %>
+  <li>This goal is private</li>
+    <% else %>
+    <li>This goal is public </li>
+  <% end %>
+</ul>
+<a href="<%= edit_goal_url(@goal) %>">Edit this goal</a><br /><p>
+<form action="<%= goal_url(@goal) %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="submit" value="delete this goal">
+</form>
+<hr>
+<a href="<%= goals_url %>">See all goals</a><br />
+<a href="<%= user_url(current_user) %>">See my profile</a><br />

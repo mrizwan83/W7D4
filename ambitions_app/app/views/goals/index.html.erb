@@ -1,0 +1,15 @@
+<h1>All my goals</h1>
+<ul>
+<% @goals.each do |goal| %>
+<li><a href="<%= goal_url(goal) %>"><%= goal.title %></a><form action="<%= goal_url(goal) %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="submit" value="delete">
+</form></li>
+
+<% end %>
+</ul>
+<% if @goals.count == 0 %>
+Feeling unmotivated? You have ZERO goals :( <p>
+  <% end %>
+<a href="<%= new_goal_url %>">Create a goal</a>
